@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Feedback Analyser</title>
+    <!-- Link to styles.css in the static folder -->
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <h1>Customer Feedback Analyser</h1>
+    <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+        <label for="fileInput">Upload Excel File:</label>
+        <input type="file" id="fileInput" name="file" accept=".xlsx,.xls">
+        <span id="fileName" class="file-name">No file selected</span>
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>

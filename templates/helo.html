@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Feedback Analyser</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <h1>Customer Feedback Analyser</h1>
+    <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+        <label for="fileInput" class="custom-file-label">Select File</label>
+        <input type="file" id="fileInput" name="file" accept=".xlsx,.xls">
+        <span id="fileName" class="file-name">No file selected</span>
+        <button type="submit">Upload</button>
+    </form>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function() {
+            let fileName = this.files.length > 0 ? this.files[0].name : "No file selected";
+            document.getElementById('fileName').textContent = fileName;
+        });
+    </script>
+</body>
+</html>
