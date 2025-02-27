@@ -13,7 +13,7 @@ def get_data():
     return text_dict
 
 # Function to summarize that have been retrieved from the uploaded document
-def summarize(text_dict):
+def summarize_reviews(text_dict):
     # Initialize the ChatGroq model
     chat = ChatGroq(temperature=0, groq_api_key="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", model_name="mixtral-8x7b-32768")
 
@@ -30,6 +30,7 @@ def summarize(text_dict):
     response = chain.invoke({"text": f"Here are the client reviews:\n{human_reviews}"})
     res = response.content
     return res
+
 # Function to analyse the summaries and provide a single summarized report of all the reviews
 def perform_analysis(text_dict):
     # Initialize the ChatGroq model

@@ -2,3 +2,7 @@ python - 3.10
 tensorflow - CPU
 Flask -
 Pandas
+groq
+langchain
+langchain-groq
+openpyxl

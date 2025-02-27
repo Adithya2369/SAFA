@@ -41,11 +41,12 @@ def upload_file():
     return render_template('upload.html', message=message)
 
 
-# def perform_analysis():
-#     return "Analysis completed: Data is well-structured and balanced."
-#
-# def suggested_improvements():
-#     return "Suggested Improvements: Consider adding more training samples for better accuracy."
+@app.route('/summarize')
+def summarize():
+    summary = summarize_reviews(material)
+    tags = 
+    senti =
+
 
 
 @app.route('/analysis')
