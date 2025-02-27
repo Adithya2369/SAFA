@@ -44,7 +44,7 @@ def upload_file():
 @app.route('/summarize')
 def summarize():
     summary = summarize_reviews(material)
-    tags = 
+    tags =
     senti =
 
 

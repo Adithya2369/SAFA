@@ -6,3 +6,5 @@ groq
 langchain
 langchain-groq
 openpyxl
+transformers
+torch

@@ -1,53 +1,24 @@
-import pandas as pd
-from transformers import pipeline
-# Load RoBERTa-based sentiment analysis pipeline
-sentiment_pipeline = pipeline("sentiment-analysis", model="cardiffnlp/twitter-roberta-base-sentiment")
-#%%
-# Load Excel file
-file_path = 'customer_reviews_feedback.xlsx'  # Replace with your Excel file path
-df = pd.read_excel(file_path)
+import os
+from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
 
-# Check if the 'text' column exists..
-if 'text' not in df.columns:
-    raise ValueError("The column 'text' is not found in the provided Excel file.")
-#%%
-# Dictionary to store sentiment scores
-sentiment_dict = {}
+# Set Up Your HuggingFace API Token
+HUGGINGFACE_API_TOKEN = 'API token'
+os.environ['HUGGINGFACEHUB_API_TOKEN'] = HUGGINGFACE_API_TOKEN
 
-# Maximum token length for the RoBERTa model
-max_length = 512
+# Loading a Pre-Trained Model from HuggingFace Hub
+model_name = "cardiffnlp/twitter-roberta-base-sentiment"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(model_name)
 
-# Analyze sentiment and store results
-sentiment_results = []
+classifier = pipeline('sentiment-analysis', model=model, tokenizer=tokenizer)
 
-for idx, text in enumerate(df['text']):
-    if isinstance(text, str) and text.strip():
-        # Truncate text if it's too long for the model
-        truncated_text = text[:max_length]
-        result = sentiment_pipeline(truncated_text)[0]
-        label = result['label'].lower()
-        if label == 'negative':
-            sentiment_results.append('Negative')
-        elif label == 'positive':
-            sentiment_results.append('Positive')
-        else:
-            sentiment_results.append('Neutral')
-        sentiment_dict[idx] = {
-            'positive': result['score'] if label == 'positive' else 0.0,
-            'negative': result['score'] if label == 'negative' else 0.0,
-            'neutral': result['score'] if label == 'neutral' else 0.0,
-            'compound': result['score']
-        }
-    else:
-        sentiment_results.append('No Data')  # Handle empty or non-string entries
-        sentiment_dict[idx] = {'positive': 0.0, 'negative': 0.0, 'neutral': 0.0, 'compound': 0.0}
-#%%
-# Add new column to DataFrame
-df['Sentiment'] = sentiment_results
+# Creating a Function to Run the Application
+def run_classification(text):
+    result1 = classifier(text)
+    return result1
 
-# Save the updated DataFrame to a new Excel file
-output_file_path = 'output_with_sentiment.xlsx'  # Replace with your desired output file path
-df.to_excel(output_file_path, index=False)
-
-print(f"Sentiment analysis complete. Results saved to '{output_file_path}'.")
-#%%
+# Running the Application
+input_text = "I Product quality is worst. Never buying it again"
+result = run_classification(input_text)
+print(f"Input: {input_text}")
+print(f"Classification: {result}")
