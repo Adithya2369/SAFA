@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Feedback Analyser</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+<h1>Customer Feedback Analyser</h1>
+    <div class="container">
+        <form class="form" id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+            <div class="file-upload-wrapper" data-text="Select your file!">
+                <input name="file-upload-field" type="file" class="file-upload-field" id="fileInput" accept=".xlsx,.xls">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        $("form").on("change", ".file-upload-field", function() {
+            $(this).parent(".file-upload-wrapper").attr("data-text", $(this).val().replace(/.*[\\/]/, '')
+);
+        });
+    </script>
+</body>
+</html>
