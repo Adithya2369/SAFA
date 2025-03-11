@@ -28,7 +28,7 @@ def home():
 def upload_file():
     if 'file' not in request.files:
         return "No file part"
-    file = request.files['file']
+    file = request.files['file-upload-field']
     if file.filename == '':
         message = "No selected file"
         #return "No selected file"
@@ -44,9 +44,6 @@ def upload_file():
 @app.route('/summarize')
 def summarize():
     summary = summarize_reviews(material)
-    tags =
-    senti =
-
 
 
 @app.route('/analysis')
