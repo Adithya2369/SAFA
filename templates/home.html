@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Feedback Analyser</title>
-    <!-- Link to styles.css in the static folder -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="../static/styles.css">
 </head>
 <body>
@@ -12,8 +12,15 @@
     <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
         <label for="fileInput">Upload Excel File:</label>
         <input type="file" id="fileInput" name="file" accept=".xlsx,.xls">
-        <span id="fileName" class="file-name">No file selected</span>
+<!--        <span id="fileName" class="file-name">No file selected</span>-->
         <button type="submit">Upload</button>
     </form>
+
+    <script>
+        $("form").on("change", ".file-upload-field", function() {
+            $(this).parent(".file-upload-wrapper").attr("data-text", $(this).val().replace(/.*[\\/]/, '')
+            );
+        });
+    </script>
 </body>
 </html>

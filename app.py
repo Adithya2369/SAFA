@@ -22,13 +22,13 @@ def process_excel():
 
 @app.route('/')
 def home():
-    return render_template('check.html')
+    return render_template('home.html')
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
         return "No file part"
-    file = request.files['file-upload-field']
+    file = request.files['file']
     if file.filename == '':
         message = "No selected file"
         #return "No selected file"
