@@ -8,18 +8,60 @@
     <link rel="stylesheet" href="../static/styles.css">
 </head>
 <body>
-    <h1>Customer Feedback Analyser</h1>
-    <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
-        <label for="fileInput">Upload Excel File:</label>
-        <input type="file" id="fileInput" name="file" accept=".xlsx,.xls">
-<!--        <span id="fileName" class="file-name">No file selected</span>-->
-        <button type="submit">Upload</button>
-    </form>
+    <div class="container">
+        <h1>Customer Feedback Analyser</h1>
+        <div class="upload-container">
+            <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+                <div class="upload-area">
+                    <label for="fileInput" class="file-label">Choose Excel File</label>
+                    <input type="file" id="fileInput" name="file" accept=".xlsx,.xls" class="file-input">
+                    <div class="file-info" id="fileInfo">No file selected</div>
+                </div>
+                <button type="submit" id="uploadButton" disabled>Upload</button>
+            </form>
+        </div>
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <ul>
+                <li>Upload an Excel file containing customer feedback</li>
+                <li>File should have a 'Text' column with customer reviews</li>
+                <li>Supported formats: .xlsx, .xls</li>
+            </ul>
+        </div>
+    </div>
 
     <script>
-        $("form").on("change", ".file-upload-field", function() {
-            $(this).parent(".file-upload-wrapper").attr("data-text", $(this).val().replace(/.*[\\/]/, '')
-            );
+        $(document).ready(function() {
+            const fileInput = $('#fileInput');
+            const fileInfo = $('#fileInfo');
+            const uploadButton = $('#uploadButton');
+
+            fileInput.on('change', function() {
+                const files = this.files;
+                if (files.length > 0) {
+                    const file = files[0];
+                    if (validateFile(file)) {
+                        fileInfo.text(file.name);
+                        uploadButton.prop('disabled', false);
+                    } else {
+                        fileInfo.text('Please upload a valid Excel file');
+                        uploadButton.prop('disabled', true);
+                    }
+                }
+            });
+
+            function validateFile(file) {
+                const validTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 
+                                  'application/vnd.ms-excel'];
+                return validTypes.includes(file.type);
+            }
+
+            $('#uploadForm').on('submit', function(e) {
+                if (!validateFile(fileInput[0].files[0])) {
+                    e.preventDefault();
+                    alert('Please upload a valid Excel file');
+                }
+            });
         });
     </script>
 </body>
