@@ -15,7 +15,7 @@ def get_data():
 # Function to summarize that have been retrieved from the uploaded document
 def summarize_reviews(text_dict):
     # Initialize the ChatGroq model
-    chat = ChatGroq(temperature=0, groq_api_key="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", model_name="mixtral-8x7b-32768")
+    chat = ChatGroq(temperature=0, groq_api_key="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", model_name="mistral-saba-24b")
 
     # Define the system and human messages
     system = "You are an AI system designed to process and summarize text. You will receive a Python dictionary where each key represents an index, and its value is a detailed review. Your task is to process this dictionary and return a new dictionary (give only dictionary donot add any other responses) with the same keys, where each value is a concise summary of the corresponding review. The summaries should be very concise, retaining the core meaning of the original review, including key insights, sentiment, and main points. Each summary should be objective, unbiased, and free from emotional or subjective language and enclosed in double quotes as strings for further programming use."
@@ -34,7 +34,7 @@ def summarize_reviews(text_dict):
 # Function to analyse the summaries and provide a single summarized report of all the reviews
 def perform_analysis(text_dict):
     # Initialize the ChatGroq model
-    chat = ChatGroq(temperature=0, groq_api_key="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", model_name="mixtral-8x7b-32768")
+    chat = ChatGroq(temperature=0, groq_api_key="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", model_name="mistral-saba-24b")
 
     # Define the system and human messages
     system = "You are a business analyst. Based on the given reviews, write a summary report highlighting the key points. If you feel like the data which you get is not at all related to reviews, just return this statement - 'PLEASE CROSS CHECK THE FILE YOU UPLOADED'"
@@ -54,7 +54,7 @@ def perform_analysis(text_dict):
 # Function to suggest improvements based on the customer feedback
 def suggested_improvements(text_dict):
 # Initialize the ChatGroq model
-    chat = ChatGroq(temperature=0, groq_api_key="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", model_name="mixtral-8x7b-32768")
+    chat = ChatGroq(temperature=0, groq_api_key="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", model_name="mistral-saba-24b")
 
     # Define the system and human messages
     system = "You are a quality assurance consultant. Based on the given client reviews, pinpoint the key areas that require improvement. Focus on identifying issues and suggesting strategies to enhance overall customer satisfaction and product quality. If you feel like the data which you get is not at all related to reviews, just return this statement - 'PLEASE CROSS CHECK THE FILE YOU UPLOADED'"
@@ -75,7 +75,7 @@ def suggested_improvements(text_dict):
 
 def Sentiment_analysis(text_dict):
     # Initialize the ChatGroq model
-    chat = ChatGroq(temperature=0, groq_api_key="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", model_name="mixtral-8x7b-32768")
+    chat = ChatGroq(temperature=0, groq_api_key="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", model_name="mistral-saba-24b")
 
     # Define the system and human messages
     system = "You are an AI system designed to analyze and classify text. You will receive a Python dictionary where each key represents an index, and its value is a detailed review. Your task is to process this dictionary and return a new dictionary (give only dictionary, do not add any other responses) with the same keys, where each value is the sentiment of the corresponding review. The sentiment should be classified as 'Positive,' 'Negative,' or 'Neutral' and enclosed in double quotes as strings for further programming use."
