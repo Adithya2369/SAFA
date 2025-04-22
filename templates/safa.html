@@ -57,6 +57,19 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
+        .section h2 {
+            color: #bb86fc;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 500;
+        }
+        .section p {
+            color: #e0e0e0;
+            line-height: 1.4;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
         .creator-section {
             display: flex;
             flex-direction: column;
@@ -134,6 +147,46 @@
             color: #e0e0e0;
             margin-bottom: 1rem;
         }
+        .naming-story {
+            background-color: rgba(187, 134, 252, 0.08);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #bb86fc;
+            margin: 2rem 0;
+            font-style: italic;
+            line-height: 1.6;
+        }
+        .naming-story strong {
+            color: #bb86fc;
+            font-style: normal;
+            display: block;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+        .naming-story em {
+            color: #bb86fc;
+            font-style: normal;
+            font-weight: 500;
+        }
+        .error-box {
+            background-color: rgba(187, 134, 252, 0.08);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #bb86fc;
+            margin: 2rem 0;
+        }
+        .error-box .humor {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        .error-box .error-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -147,7 +200,7 @@
             Hi dude! 👋
         </div>
         <div class="humor">
-            "Welcome to the page that probably took longer to design than it will take you to read it!"
+            "Welcome to the page that probably took a lot longer to design than it will take you to read it!"
         </div>
 
         <div class="section creator-section">
@@ -162,11 +215,14 @@
         </div>
 
         <div class="section">
-            <h2>About SAFA</h2>
+            <h2>About Safa</h2>
             <p>Safa is your personal assistant when it comes to understanding what your customers are really saying. Whether it's praise, complaints, or helpful suggestions, Safa carefully goes through every review to give you a clear picture of how people feel about your product or service. It not only captures the mood of your customers but also highlights common themes and offers thoughtful ideas to help you improve. Safa turns scattered feedback into meaningful insights—so you can focus more on action, and less on sorting through words.</p>
             <p>Whether you're running a small business or a growing brand, Safa helps you stay connected with your customers' voices in a simple, human way.</p>
-            <p>The name Safa is inspired by the full form of the project—Customer Feedback Analyser (CFA). Rearranged and softened into Safa, the name carries a calm and friendly tone, much like the experience it offers. Just as the name suggests, Safa is here to bring clarity, simplicity, and a touch of ease to what often feels like a messy pile of feedback. It reflects the project’s core mission: making feedback feel less like noise and more like a conversation.</p>
-            <p>This project is built using cutting-edge technologies like:</p>
+            
+            <p class="naming-story"><strong>Why the name "Safa"?</strong><br>
+                The name <em>Safa</em> comes from the project's full name—<em>Customer Feedback Analyser (CFA)</em>. By rearranging the letters and softening the tone, the name Safa was born. It has a calm, friendly feel that reflects what the tool aims to do: make sense of chaotic feedback and turn it into something meaningful. It's not just a name—it's the personality of the experience. Simple, warm, and purposeful.</p>                
+            
+                <p>This project is built using cutting-edge technologies like:</p>
                 <ul>
                     <li>Groq API - Powering high-speed AI responses using the Mistral model</li>
                     <li>LangChain - Orchestrating smooth flow and management of feedback tasks</li>
@@ -175,13 +231,15 @@
                     <li>HTML, CSS & JavaScript - Creating a clean and user-friendly frontend</li>
                 </ul>
 
-            <p class="humor">"I have worked my ass off to design these ends, later to know that these pages are visited very rarely and some are never visited"</p>
-            
-            <div class="error-buttons">
-                <a href="/404" class="error-button">404</a>
-                <a href="/500" class="error-button">500</a>
-                <a href="/502" class="error-button">502</a>
-                <a href="/503" class="error-button">503</a>
+            <div class="error-box">
+                <p class="humor">"I worked my ass off designing these error pages—only to realize they're rarely visited, and some might never be seen at all."</p>
+                
+                <div class="error-buttons">
+                    <a href="/404" class="error-button">404</a>
+                    <a href="/500" class="error-button">500</a>
+                    <a href="/502" class="error-button">502</a>
+                    <a href="/503" class="error-button">503</a>
+                </div>
             </div>
         </div>
 

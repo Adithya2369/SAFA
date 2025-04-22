@@ -56,6 +56,10 @@ def suggest():
     result = suggested_improvements(material)
     return render_template('suggest.html', message=result)
 
+@app.route('/safa')
+def safa():
+    return render_template('safa.html')
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
