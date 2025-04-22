@@ -150,7 +150,8 @@ button:not(:disabled):active {
 
 .tagline {
     color: #bb86fc;
-    font-size: 1.5rem;
+    font-size: 1rem;
+    font-style: italic;
     font-weight: 300;
     margin: 0;
 }
