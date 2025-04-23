@@ -50,13 +50,15 @@ def summarize():
 @app.route('/analysis')
 def analysis():
     result = perform_analysis(material)
+    # Convert markdown to HTML
+    result = markdown.markdown(result)
     return render_template('analysis.html', message=result)
 
 @app.route('/suggest')
 def suggest():
     result = suggested_improvements(material)
-    # Convert markdown to HTML
-    html_content = markdown.markdown(result)
+    # Convert markdown to HTML with ordered list numbering disabled
+    html_content = markdown.markdown(result, extensions=['nl2br'], output_format='html5')
     return render_template('suggest.html', message=html_content)
 
 @app.route('/safa')
