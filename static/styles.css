@@ -94,6 +94,19 @@ button:not(:disabled):active {
     transform: translateY(0);
 }
 
+.about-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.about-icon:hover {
+    transform: scale(1.1);
+}
+
 .instructions {
     background-color: #1e1e1e;
     padding: 1.5rem;

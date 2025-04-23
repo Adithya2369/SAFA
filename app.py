@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect, jsonify, render_template
 import os
 import pandas as pd
+import markdown
 from werkzeug.utils import secure_filename
 from app_functions import *
 
@@ -54,7 +55,9 @@ def analysis():
 @app.route('/suggest')
 def suggest():
     result = suggested_improvements(material)
-    return render_template('suggest.html', message=result)
+    # Convert markdown to HTML
+    html_content = markdown.markdown(result)
+    return render_template('suggest.html', message=html_content)
 
 @app.route('/safa')
 def safa():
