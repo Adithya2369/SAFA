@@ -65,6 +65,26 @@ def suggest():
 def safa():
     return render_template('safa.html')
 
+#####################################################
+#trials of errors
+@app.route('/404_copy')
+def copy_404():
+    return render_template('404.html')
+
+@app.route('/500_copy')
+def copy_500():
+    return render_template('500.html')
+
+@app.route('/502_copy')
+def copy_502():
+    return render_template('502.html')
+
+@app.route('/503_copy')
+def copy_503():
+    return render_template('503.html')
+
+##################################################
+# ERROR HANDLERS
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
