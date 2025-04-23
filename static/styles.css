@@ -102,9 +102,32 @@ button:not(:disabled):active {
     height: 50px;
     cursor: pointer;
     transition: transform 0.3s ease;
+    padding: 4px;
+    border: 2px solid rgba(187, 134, 252, 0.4);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(187, 134, 252, 0.4);
+    animation: glow 2s infinite;
 }
+
+@keyframes glow {
+    0% {
+        border-color: rgba(187, 134, 252, 0.4);
+        box-shadow: 0 0 20px rgba(187, 134, 252, 0.4);
+    }
+    50% {
+        border-color: rgba(187, 134, 252, 0.6);
+        box-shadow: 0 0 30px rgba(187, 134, 252, 0.6);
+    }
+    100% {
+        border-color: rgba(187, 134, 252, 0.4);
+        box-shadow: 0 0 20px rgba(187, 134, 252, 0.4);
+    }
+}
+
 .about-icon:hover {
     transform: scale(1.1);
+    border-color: rgba(187, 134, 252, 0.8);
+    box-shadow: 0 0 40px rgba(187, 134, 252, 0.8);
 }
 
 .instructions {
