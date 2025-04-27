@@ -85,8 +85,21 @@ def tag_it(text_dict):
     res = response.content
     return res
 
+def count_sentiments(df):
+    positive_count = (df['Sentiment'] == 'Positive').sum()
+    negative_count = (df['Sentiment'] == 'Negative').sum()
+    neutral_count = (df['Sentiment'] == 'Neutral').sum()
+    gen_rating_mean = df['Rating'].mean()
+    return positive_count, negative_count, neutral_count, gen_rating_mean
+
+def actual_rating(df):
+    act_rating_mean = df['Rating'].mean()
+    return act_rating_mean
+print("actual rating = ", actual_rating(df))
+
 df1 = csv_text_to_dataframe(summarize(text_dict))
 df2 = csv_text_to_dataframe(tag_it(text_dict))
 
 merged_df = df1.merge(df2, on="Index", how="left")
 print(merged_df)
+print(count_sentiments(merged_df))
