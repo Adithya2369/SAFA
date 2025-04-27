@@ -1,6 +1,7 @@
 import pandas as pd
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_groq import ChatGroq
+from io import StringIO
 
 # Update the path to the Excel file
 df = pd.read_excel('uploads/TestData.xlsx')
@@ -9,24 +10,35 @@ df = pd.read_excel('uploads/TestData.xlsx')
 text_column = df['Text']
 text_dict = text_column.to_dict()
 
+def csv_text_to_dataframe(csv_text):
+    # Use StringIO to treat the text like a file
+    csv_data = StringIO(csv_text)
+    # Define the column names manually
+    df = pd.read_csv(csv_data) #, header=None, names=["ID", "Review", "Rating", "Sentiment"])
+    return df
 
 def summarize(text_dict):
     # Initialize the ChatGroq model
     chat = ChatGroq(temperature=0, groq_api_key="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", model_name="llama3-70b-8192")
 
     # Define the system message with additional requirements
-    system = """You are an AI system designed to process and summarize text. 
+    system = """You are an AI system designed to process and summarize text.
     You will receive a Python dictionary where each key represents an index, and its value is a detailed review.
-    Your task is to process this dictionary and return the output as a CSV text (no files, only plain text).
-    Each row should have:
-    - "Index": same as the dictionary key,
-    - "Summary": a very concise summary of the review (enclosed in double quotes),
-    - "Rating": a rating from 1 to 5 depending on the review,
-    - "Sentiment": either Positive, Negative, or Neutral.
+    Your task is to process this dictionary and return the output as CSV text (no files, only plain text).
+
+    CSV Requirements:
+    - The header must be exactly: Index,Review,Rating,Sentiment (spellings must match exactly).
+    - Each row should have:
+        - "Index": same as the dictionary key,
+        - "Review": a very concise summary of the review (enclosed in double quotes),
+        - "Rating": an integer from 1 to 5 based on the review,
+        - "Sentiment": either Positive, Negative, or Neutral.
+
     Strict Instructions:
-    - Respond ONLY with raw CSV format text.
-    - Do not add any extra explanations, messages, or headings.
-    - Keep everything as plain CSV text.
+    - Respond ONLY with raw CSV text.
+    - Do NOT add any explanations, titles, or extra formatting.
+    - Ensure the column names match exactly: Index,Review,Rating,Sentiment.
+
     The summaries must be objective, unbiased, and free from emotional language."""
 
     # Join the reviews into one string
@@ -45,4 +57,5 @@ def summarize(text_dict):
 
 
 # Test the updated function
-print(summarize(text_dict))
+#print(summarize(text_dict))
+print(csv_text_to_dataframe(summarize(text_dict)))
