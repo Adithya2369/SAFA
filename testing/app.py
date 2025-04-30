@@ -6,11 +6,15 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     # Sample DataFrame
+    actual_rating_flag = False
+    actual_rating = 3.5
+    positive = 15
+    negative = 5
+    neutral = 10
+    ai_rating = 2
     data = {
-        'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eva', 'Frank', 'Grace', 'Hannah', 'Ian', 'Judy'],
-        'ID': [101, 102, 103, 104, 105, 106, 107, 108, 109, 110],
-        'Country': ['USA', 'UK', 'Canada', 'Australia', 'Germany', 'India', 'France', 'Japan', 'Brazil', 'South Africa'],
-        'Sentence': [
+        'Index': [101, 102, 103, 104, 105, 106, 107, 108, 109, 110],
+        'Summarised Review': [
             "Alice enjoys hiking on weekends.",
             "Bob is learning to play the guitar.",
             "Charlie works as a data analyst.",
@@ -21,13 +25,16 @@ def index():
             "Hannah is writing a science fiction novel.",
             "Ian loves mountain biking.",
             "Judy teaches mathematics at a university."
-        ]
+        ],
+        'Rating': [1,2,3,4,5,6,7,8,9,10],
+        'Sentiment': ['pos', 'pos', 'neg', 'neg', 'neu', 'neu', 'pos', 'pos', 'neg', 'neg',],
+        'Tags': ['product', 'quality', 'cc', 'delivery', 'package', 'warehouse', 'quality', 'cc', 'delivery', 'package']
     }
 
     df = pd.DataFrame(data)
 
     # Render the HTML with the DataFrame
-    return render_template('summarise.html', table=df.to_html(classes='table table-bordered', index=False))
+    return render_template('summarise.html', table=df.to_html(classes='table table-bordered', index=False), actr = actual_rating_flag, flg = actual_rating, pos = positive, neg = negative, neu = neutral, air = ai_rating)
 
 if __name__ == '__main__':
     app.run(debug=True)
