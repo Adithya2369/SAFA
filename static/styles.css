@@ -199,6 +199,199 @@ button:not(:disabled):active {
     padding: 0 1rem;
 }
 
+/* ==================Dashboard styling {START}================== */
+.dashboard_container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.top-container {
+  display: flex;
+  gap: 25px;
+  padding: 10px;
+}
+
+.top-container .section {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; */
+  flex: 1;
+  /* height: 150px;*/            /*This sets a fixed height */
+  background-color: #1e1e1e;
+  text-align: center;
+  padding-top: 60px;
+  border-radius: 15px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2.5rem;
+  border: 1px solid #ff8a65;
+}
+
+.bottom-section {
+  background-color: #1e1e1e;
+  text-align: center;
+  border-radius: 15px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2.5rem;
+  border: 2px solid #2196f3;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  background-color: #1e1e1e;
+  text-align: center;
+  border-radius: 15px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2.5rem;
+  border: 1px solid #ff8a65;
+  position: relative;
+}
+
+.section-content {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-title {
+    color: #bb86fc;
+    font-style: normal;
+    font-weight: 450;
+    font-size: 1.2rem;
+    margin-top: -1rem; /* moves it slightly higher */
+    margin-bottom: 1rem;
+    text-align: center;
+    position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #bb86fc;
+  margin: 0.5rem auto 0; /* spacing from text & auto centers the line */
+  opacity: 0.6;
+}
+
+.rating-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.rating-emoji {
+  font-size: 6rem;
+  margin-top: -3rem;
+  /* margin-bottom: 0.5rem; */
+  animation: emojiAnimation 1s ease-out;
+}
+
+.stars {
+  font-size: 3rem;
+  color: #555;
+  position: relative;
+  line-height: 1;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  animation: emojiAnimation 1s ease-out;
+}
+
+.stars::before {
+  content: '★★★★★';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: gold;
+  width: 0%;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.rating-text{
+  color: #e0e0e0;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 300;
+  margin: 0;
+  animation: emojiAnimation 1s ease-out;
+}
+
+.bar-container {
+  width: 80%;
+  max-width: 800px;
+  position: relative;
+}
+
+.bar-outline {
+  height: 25px;
+  width: 100%;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+#fill {
+  background-color: #FF69B4;
+  height: 100%;
+  width: 0%;
+  border-radius: 1px;
+  transition: width 2s ease-in-out;
+}
+
+#heart {
+  position: absolute;
+  left: 0%;
+  top: -50px;
+  font-size: 40px;
+  transition: left 2s ease-in-out;
+  transform: translateX(-50%);
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.dataTables_wrapper .dataTables_filter {
+  float: right;
+}
+
+@keyframes emojiAnimation {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/*this one for mobile*/
+/*@media (max-width: 768px) {*/
+/*  .top-container {*/
+/*    flex-direction: column;*/
+/*  }*/
+/*}*/
+/* ==================Dashboard styling {END}================== */
+
 /* ============================================================= */
 /* 2 different test cases */
 /* Messed up situation, be carefull when uncommenting */
@@ -342,7 +535,7 @@ button:not(:disabled):active {
 /* Suggestion box styling here - START */
 /* =========================================================== */
 
-   .suggestions-box {
+.suggestions-box {
     background-color: #1e1e1e;
     border-radius: 12px;
     padding: 2.5rem;

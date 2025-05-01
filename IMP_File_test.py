@@ -21,20 +21,21 @@ def summarize(text_dict):
     chat = ChatGroq(temperature=0, groq_api_key="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", model_name="llama3-70b-8192")
 
     # Define the system message with additional requirements
-    system = """You are an AI system designed to process and summarize text.
+    system = system = """You are an AI system designed to process and summarize text.
     You will receive a Python dictionary where each key represents an index, and its value is a detailed review.
     Your task is to process this dictionary and return the output as CSV text (no files, only plain text).
     CSV Requirements:
     - The header must be exactly: Index,Review,Rating,Sentiment (spellings must match exactly).
     - Each row should have:
-        - "Index": same as the dictionary key,
+        - "Index": same as the dictionary key (no quotes around the index),
         - "Review": a very concise summary of the review (enclosed in double quotes),
-        - "Rating": an integer from 1 to 5 based on the review,
-        - "Sentiment": either Positive, Negative, or Neutral.
+        - "Satisfaction Score": an integer from 1 to 100 based on the review, that indicates how much is the customer satisfied,
+        - "Sentiment": either Positive, Negative, or Neutral (no quotes around the sentiment).
     Strict Instructions:
     - Respond ONLY with raw CSV text.
     - Do NOT add any explanations, titles, or extra formatting.
-    - Ensure the column names match exactly: Index,Review,Rating,Sentiment.
+    - Ensure the column names match exactly: Index,Review,Satisfaction Score,Sentiment.
+    - Do NOT put Satisfaction Score in quotes "".
     The summaries must be objective, unbiased, and free from emotional language."""
     # Join the reviews into one string
     human_reviews = "\n".join(f"{key + 1}: {value}" for key, value in text_dict.items())
@@ -69,8 +70,13 @@ def tag_it(text_dict):
        - If a review does not fit any clear category, assign it to `"Other"`.  
     {{4}} Return the output as a CSV text (no files, only plain text):  
         Each row should have:
-        - "Index": same as the dictionary key,  
-        - "Tags": containing the assigned categories, separated by commas and in double quotes"".    
+        - "Index": same as the dictionary key and an integer value,  
+        - "Tags": containing the assigned categories, separated by commas and in double quotes"".
+    Strict Instructions:
+    - Respond ONLY with raw CSV text.
+    - Do NOT add any explanations, titles, or extra formatting.
+    - Do NOT put the index numbers in quotes "".
+    - Ensure the column names match exactly: Index,Tags. And do NOT put them in quotes "".
     Do **not** provide explanations, extra text, or formatting—just return the csv text only, not even the text like "here is the required information or something like that".
     """
     human_reviews = "\n".join(f"{key + 1}: {value}" for key, value in text_dict.items())
@@ -89,17 +95,21 @@ def count_sentiments(df):
     positive_count = (df['Sentiment'] == 'Positive').sum()
     negative_count = (df['Sentiment'] == 'Negative').sum()
     neutral_count = (df['Sentiment'] == 'Neutral').sum()
-    gen_rating_mean = df['Rating'].mean()
+    gen_rating_mean = 75
     return positive_count, negative_count, neutral_count, gen_rating_mean
 
-def actual_rating(df):
-    act_rating_mean = df['Rating'].mean()
-    return act_rating_mean
-print("actual rating = ", actual_rating(df))
+# def actual_rating(df):
+#     act_rating_mean = df['Rating'].mean()
+#     return act_rating_mean
+# print("actual rating = ", actual_rating(df))
+
+
+# print(summarize(text_dict))
+# print(tag_it(text_dict))
+
 
 df1 = csv_text_to_dataframe(summarize(text_dict))
 df2 = csv_text_to_dataframe(tag_it(text_dict))
-
 merged_df = df1.merge(df2, on="Index", how="left")
 print(merged_df)
 print(count_sentiments(merged_df))

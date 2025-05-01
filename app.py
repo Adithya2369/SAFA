@@ -32,7 +32,6 @@ def upload_file():
     file = request.files['file']
     if file.filename == '':
         message = "No selected file"
-        #return "No selected file"
     if file:
         filename = secure_filename(file.filename)
         new_filename = 'stored_excel_file.xlsx'  # Custom name for future use
@@ -41,15 +40,24 @@ def upload_file():
         process_excel()
     return render_template('upload.html', message=message)
 
-
-@app.route('/summarize')
-def summarize():
-    return render_template('summarize.html')
-
+@app.route('/dashboard')
+def dashboard():
+    df1 = csv_text_to_dataframe(summarize(material))
+    df2 = csv_text_to_dataframe(tag_it(material))
+    merged_df = df1.merge(df2, on="Index", how="left")
+    actual_rating_flag = True
+    avg_rating = actual_rating()
+    # avg_rating = 3.8
+    positive, negative, neutral = count_sentiments(merged_df)
+    satisfaction_score = clean_and_mean(merged_df)
+    return render_template('dashboard.html',
+                           table=merged_df.to_html(classes='table table-bordered', index=False, table_id="myTable"),
+                           flg=actual_rating_flag, actr=avg_rating, pos=positive, neg=negative, neu=neutral,
+                           air=satisfaction_score)
 
 @app.route('/analysis')
 def analysis():
-    result = perform_analysis(material)
+    result = analysis_report(material)
     # Convert markdown to HTML
     result = markdown.markdown(result)
     return render_template('analysis.html', message=result)

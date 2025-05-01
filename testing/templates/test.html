@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+
   <style>
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -206,6 +209,16 @@
       transform: translateX(-50%);
     }
 
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter {
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .dataTables_wrapper .dataTables_filter {
+      float: right;
+    }
+
     @keyframes emojiAnimation {
       0% {
         transform: scale(0);
@@ -216,6 +229,12 @@
         opacity: 1;
       }
     }
+    /*this one for mobile*/
+    /*@media (max-width: 768px) {*/
+    /*  .top-container {*/
+    /*    flex-direction: column;*/
+    /*  }*/
+    /*}*/
 
   </style>
 
@@ -264,7 +283,13 @@
     </div>      
   </div>
 
-  <div class="bottom-section">Big Section Below</div>
+  <div class="bottom-section">
+    <div class="section-title">Table Title</div>
+    <div style="overflow-x:auto;">
+      {{ table|safe }}
+    </div>
+
+  </div>
 </div>
 
 
@@ -353,9 +378,21 @@
           }
       }
   });
-
-// ========================================section - 4 {TABLE}=========================================
-
 </script>
+
+<!-- ========================================section - 4 {TABLE}=========================================-->
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#myTable').DataTable({
+      responsive: true
+    });
+  });
+</script>
+
 </body>
 </html>

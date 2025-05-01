@@ -34,7 +34,7 @@ def index():
     df = pd.DataFrame(data)
 
     # Render the HTML with the DataFrame
-    return render_template('test.html', table=df.to_html(classes='table table-bordered', index=False), flg = actual_rating_flag, actr = actual_rating, pos = positive, neg = negative, neu = neutral, air = ai_rating)
+    return render_template('test.html', table = df.to_html(classes='table table-bordered', index=False, table_id="myTable"), flg = actual_rating_flag, actr = actual_rating, pos = positive, neg = negative, neu = neutral, air = ai_rating)
 
 if __name__ == '__main__':
     app.run(debug=True)
