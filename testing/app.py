@@ -7,11 +7,11 @@ app = Flask(__name__)
 def index():
     # Sample DataFrame
     actual_rating_flag = False
-    actual_rating = 3.5
+    actual_rating = 3.75
     positive = 15
     negative = 5
     neutral = 10
-    ai_rating = 2
+    ai_rating = 82
     data = {
         'Index': [101, 102, 103, 104, 105, 106, 107, 108, 109, 110],
         'Summarised Review': [
@@ -34,7 +34,7 @@ def index():
     df = pd.DataFrame(data)
 
     # Render the HTML with the DataFrame
-    return render_template('summarise.html', table=df.to_html(classes='table table-bordered', index=False), actr = actual_rating_flag, flg = actual_rating, pos = positive, neg = negative, neu = neutral, air = ai_rating)
+    return render_template('test.html', table=df.to_html(classes='table table-bordered', index=False), flg = actual_rating_flag, actr = actual_rating, pos = positive, neg = negative, neu = neutral, air = ai_rating)
 
 if __name__ == '__main__':
     app.run(debug=True)
