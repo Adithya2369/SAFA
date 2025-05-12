@@ -6,6 +6,41 @@
     <title>Customer Feedback Analyser</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="../static/styles.css">
+    <style>
+    .sample-download-box {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background-color: #1e1e1e;
+        color: white;
+        border: 2px solid rgba(187, 134, 252, 0.4);
+        border-radius: 8px;
+        padding: 10px;
+        width: 145px; /* Reduced width */
+        font-family: Arial, sans-serif;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .sample-download-box p {
+        margin: 0 0 8px 0;
+        font-size: 10px;
+    }
+
+    .sample-download-box a {
+        display: inline-block;
+        padding: 6px 10px;
+        background-color: #007BFF;
+        color: white;
+        text-decoration: none;
+        border-radius: 3px;
+        font-size: 9px;
+    }
+
+    .sample-download-box a:hover {
+        background-color: #0056b3;
+    }
+</style>
+
 </head>
 <body>
     <div class="container">
@@ -15,6 +50,10 @@
                 <h1 class="tagline">A Customer Feedback Analyser</h1>
             </div>
         </header>
+        <div class="sample-download-box">
+        <p>Click below to download sample files for testing the tool.</p>
+        <a href="https://drive.google.com/drive/folders/1hSip0BHe0qx3b_f117CeW2Rx0fgYupjY?usp=sharing" target="_blank">Samples</a>
+    </div>
 
         <div class="upload-container">
             <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
@@ -30,7 +69,7 @@
             <h3>Instructions:</h3>
             <ul>
                 <li>Upload an Excel file containing customer feedback</li>
-                <li>File should have a 'Text' column with customer reviews</li>
+                <li>File should have 'Text' & 'Rating' columns with customer reviews and ratings respectively</li>
                 <li>Supported formats: .xlsx, .xls</li>
             </ul>
         </div>
