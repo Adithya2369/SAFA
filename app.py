@@ -25,20 +25,39 @@ def process_excel():
 def home():
     return render_template('home.html')
 
-@app.route('/upload', methods=['POST'])
+# @app.route('/upload', methods=['GET', 'POST'])
+# def upload_file():
+#     if 'file' not in request.files:
+#         return "No file part"
+#     file = request.files['file']
+#     if file.filename == '':
+#         message = "No selected file"
+#     if file:
+#         filename = secure_filename(file.filename)
+#         new_filename = 'stored_excel_file.xlsx'  # Custom name for future use
+#         file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
+#         message = "File uploaded successfully"
+#         process_excel()
+#     return render_template('upload.html', message=message)
+
+@app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
-    if 'file' not in request.files:
-        return "No file part"
-    file = request.files['file']
-    if file.filename == '':
-        message = "No selected file"
-    if file:
-        filename = secure_filename(file.filename)
-        new_filename = 'stored_excel_file.xlsx'  # Custom name for future use
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
-        message = "File uploaded successfully"
-        process_excel()
-    return render_template('upload.html', message=message)
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            return render_template('upload.html', message="No file part")
+        file = request.files['file']
+        if file.filename == '':
+            return render_template('upload.html', message="No selected file")
+        if file:
+            filename = secure_filename(file.filename)
+            new_filename = 'stored_excel_file.xlsx'
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
+            process_excel()
+            return render_template('upload.html', message="File uploaded successfully")
+    else:
+        # When user clicks "Back to Options" button
+        return render_template('upload.html', message="")
+
 
 @app.route('/dashboard')
 def dashboard():
