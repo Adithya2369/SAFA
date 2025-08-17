@@ -14,7 +14,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 material = {}
 def process_excel():
     global material  # Declare the global variable inside the function
-    df = pd.read_excel('uploads/TestData.xlsx')
+    df = pd.read_excel('uploads/stored_excel_file.xlsx')
     # Extract the 'Text' column and convert it to a dictionary
     text_column = df['Text']
     material = text_column.to_dict()  # Assign to the global variable

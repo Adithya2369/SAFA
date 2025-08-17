@@ -7,7 +7,7 @@ from io import StringIO
 # Functions used:
 # Function to create the dictionary of all the reviews. Later can be used to pass this as an argument to other functions
 def get_data():
-    df = pd.read_excel('uploads/TestData.xlsx')
+    df = pd.read_excel('uploads/stored_excel_file.xlsx')
     # Extract the 'text' column and convert to a dictionary
     text_column = df['Text']
     text_dict = text_column.to_dict()
@@ -21,7 +21,7 @@ def csv_text_to_dataframe(csv_text):
     return df
 
 def actual_rating():
-    df = pd.read_excel('uploads/TestData.xlsx')
+    df = pd.read_excel('uploads/stored_excel_file.xlsx')
     act_rating_mean = round(df['Rating'].mean(), 1)
     return act_rating_mean
 
